@@ -44,7 +44,7 @@ class Animation(object):
         self.line.set_data(self.xdata,self.ydata)
         return self.line
     def animateGenerate(self):
-        self.ani=FuncAnimation(self.fig ,self.animate, init_func=self.animateInit, frames=self.x.shape[0],interval=0,blit=True)
+        self.ani=FuncAnimation(self.fig ,self.animate, init_func=self.animateInit, frames=self.x.shape[0],interval=0.1,blit=True)
 #        self.ani.save('anim.mp4',writer='ffmpeg',fps=30)
             
 class CadenceBuffer(object):

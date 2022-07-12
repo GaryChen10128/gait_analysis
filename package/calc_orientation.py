@@ -92,6 +92,7 @@ def calc_orientation_mag(gyr,acc,mag,samplerate,align_arr,beta,delta_t,times):
         rms_mag[i]=np.sqrt(np.mean(mag[i,0]**2+mag[i,1]**2+mag[i,2]**2))
     count=0
     ll=len(gyr)
+    lastMag=0
     for i in range(0,len(gyr)-1):
         if (i%2000)==0:
             print(str(i)+' / '+str(ll)+'  '+str(round(i/ll*100,1))+'%')
@@ -105,7 +106,12 @@ def calc_orientation_mag(gyr,acc,mag,samplerate,align_arr,beta,delta_t,times):
             count=0
         else:
             while(count<times):
-                madgwick.update(gyr[i],acc[i],mag[i],delta_t[i])
+                if(mag[i][0]!=lastMag):
+                    madgwick.update(gyr[i],acc[i],mag[i],delta_t[i])
+                    lastMag=mag[i][0]
+                else:
+                    madgwick.update_imu(gyr[i],acc[i],delta_t[i])
+                
                 count+=1
             count=0
         ref_qq[i,0]=madgwick.quaternion._get_q()[0]

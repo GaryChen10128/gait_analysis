@@ -125,9 +125,9 @@ def main():
     debug_c=0
     for x,y,z,q in zip(accX,accY,accZ,quat):
         acc.append(q_rot(q_conj(q), np.array([x, y, z])))
-        print(debug_c,np.array([x, y, z]))
-        print(debug_c,q)
-        print(debug_c,q_rot(q_conj(q), np.array([x, y, z])))
+        # print(debug_c,np.array([x, y, z]))
+        # print(debug_c,q)
+        # print(debug_c,q_rot(q_conj(q), np.array([x, y, z])))
         debug_c+=1
     return
     acc = np.array(acc)
